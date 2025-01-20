@@ -5,6 +5,8 @@ import DeleteCardModal from "./deleteCardModal";
 import UpdateCardModal from "./updateCardModal";
 import { Link } from "react-router-dom";
 import usePagination from "../../customHooks/usePagination";
+import { SiteTheme } from "../App";
+import "./style/Home.css";
 
 function Home({ searchQuery }) {
     const [cards, setCards] = useState([]);
@@ -72,6 +74,8 @@ function Home({ searchQuery }) {
         handleNextPageGroup,
         handlePreviousPageGroup,
     } = usePagination(filteredCards);
+
+    const themes = useContext(SiteTheme);
 
     return (
         <div className="container mt-4">

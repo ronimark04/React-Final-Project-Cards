@@ -29,6 +29,10 @@
     font-size: 1.3rem;
 }
 
+.navbar-links-dropdown {
+    display: none;
+}
+
 .navbar-links a,
 .auth-links a {
     text-decoration: none;
@@ -79,4 +83,62 @@
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
+}
+
+@media(max-width: 768px) {
+    .navbar-links {
+        display: none;
+    }
+
+    .navbar-logo:hover+.navbar-links-dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        position: absolute;
+        z-index: 100;
+        top: 4rem;
+        left: 0;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+    }
+
+    .navbar-links-dropdown a {
+        font-size: 1.2rem;
+        text-decoration: none;
+        color: #060F16;
+    }
+
+    .navbar-links-dropdown a:hover {
+        opacity: 0.8;
+    }
+
+
+    .navbar {
+        padding: 0.8rem 1.8rem;
+    }
+
+    .navbar-logo {
+        height: 35px;
+    }
+
+    .navbar-controls {
+        gap: 0.7rem;
+    }
+
+    .search-bar {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+
+    .profile-img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .auth-links a {
+        font-size: 1.1rem;
+    }
 }
