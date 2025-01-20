@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllCards, toggleLike } from "../services/cardsService";
 import { jwtDecode } from "jwt-decode";
 import DeleteCardModal from "./deleteCardModal";
@@ -78,51 +78,60 @@ function Home({ searchQuery }) {
     const themes = useContext(SiteTheme);
 
     return (
-        <div className="container mt-4">
-            <h1>Cards Page</h1>
-            <h2>Here you can find business cards from all categories</h2>
+        <div
+            className="home-container"
+        >
+            <h1 className="home-title">Cards Page</h1>
+            <h2 className="home-subtitle">Here you can find business cards from all categories</h2>
             {isLoading ? (
-                <div className="spinner-border text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
+                <div className="spinner-container">
+                    <div className="spinner"></div>
                 </div>
             ) : (
-                <>{currentCards.length > 0 ? (
-                    <div className="row">
-                        {currentCards.map((card) => (
-                            <div className="col-md-4 col-sm-6 mb-4" key={card._id}>
-                                <div className="card" style={{ width: "100%" }}>
+                <>
+                    {currentCards.length > 0 ? (
+                        <div className="card-grid">
+                            {currentCards.map((card) => (
+                                <div className="card" key={card._id} style={{
+                                    backgroundColor: themes.card.bgColor,
+                                    color: themes.card.textColor
+                                }}>
                                     <Link to={`/home/${card._id}`}>
                                         <img
-                                            className="card-img-top"
+                                            className="card-img"
                                             src={card.image.url}
                                             alt={card.image.alt}
-                                            style={{ height: "200px", objectFit: "cover" }} /></Link>
+                                        />
+                                    </Link>
                                     <div className="card-body">
-                                        <Link to={`/home/${card._id}`}><h4 className="card-title">{card.title}</h4></Link>
-                                        <h6 className="card-title">{card.subtitle}</h6>
-                                        <p className="card-text">{card.phone}</p>
+                                        <Link to={`/home/${card._id}`}>
+                                            <h4 className="card-title">{card.title}</h4>
+                                        </Link>
+                                        <h6 className="card-subtitle">{card.subtitle}</h6>
+                                        <hr />
                                         <p className="card-text">
-                                            {card.address.country}, {card.address.city},{" "}
-                                            {card.address.street} {card.address.houseNumber}
+                                            Phone: {card.phone}
                                         </p>
-                                        <p className="card-text">{card.email}</p>
-                                        <div
-                                            className="icons"
-                                            style={{ display: "flex", justifyContent: "space-between" }}>
+                                        <p className="card-text">
+                                            Address: {card.address.street} {card.address.houseNumber}, {card.address.city}, {card.address.country}
+                                        </p>
+                                        <p className="card-text">Card Number: {card.bizNumber}</p>
+                                        <div className="card-icons">
                                             <div
-                                                style={{ display: "flex", flexDirection: "row", cursor: "pointer" }}
-                                                onClick={() => handleToggleLike(card)}>
-                                                {user && card.likes.includes(user._id) ? (
-                                                    <i className="fa-solid fa-heart text-danger" style={{ cursor: "pointer" }}></i>
-                                                ) : (
-                                                    <i className="fa-regular fa-heart" style={{ cursor: "pointer" }}></i>
-                                                )}
+                                                className="like-icon"
+                                                onClick={() => handleToggleLike(card)}
+                                            >
+                                                <i
+                                                    className={`fa-heart ${user && card.likes.includes(user._id)
+                                                        ? "fa-solid liked"
+                                                        : "fa-regular"
+                                                        }`}
+                                                ></i>
                                                 <p>{card.likes.length}</p>
                                             </div>
-                                            {user &&
-                                                user.isBusiness &&
-                                                card.user_id === user._id && (
-                                                    <><i
+                                            {user && user.isBusiness && card.user_id === user._id && (
+                                                <>
+                                                    <i
                                                         className="fa-solid fa-pencil"
                                                         style={{ cursor: "pointer" }}
                                                         onClick={() => {
@@ -130,55 +139,58 @@ function Home({ searchQuery }) {
                                                             setCardId(card._id);
                                                         }}
                                                     ></i>
-                                                        <i
-                                                            className="fa-regular fa-trash-can"
-                                                            style={{ cursor: "pointer" }}
-                                                            onClick={() => {
-                                                                setOpenDeleteModal(true);
-                                                                setCardId(card._id);
-                                                                setBizNumber(card.bizNumber);
-                                                            }}
-                                                        ></i>
-                                                    </>
-                                                )}
-                                            <a href={`tel:${card.phone}`}><i className="fa-solid fa-phone" style={{ cursor: "pointer" }}></i></a>
+                                                    <i
+                                                        className="fa-regular fa-trash-can"
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => {
+                                                            setOpenDeleteModal(true);
+                                                            setCardId(card._id);
+                                                            setBizNumber(card.bizNumber);
+                                                        }}
+                                                    ></i>
+                                                </>
+                                            )}
+                                            <a href={`tel:${card.phone}`}>
+                                                <i className="fa-solid fa-phone"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p>No cards found</p>
-                )}
-                    <div className="pagination-controls mt-4 d-flex justify-content-center align-items-center">
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-cards-message">No cards found</p>
+                    )}
+                    <div className="pagination-controls" style={{ color: themes.card.textColor }}>
                         <button
-                            className="btn btn-primary me-2"
+                            className="pagination-button"
                             disabled={pageGroup === 1}
-                            onClick={handlePreviousPageGroup}>
+                            onClick={handlePreviousPageGroup}
+                        >
                             &laquo;
                         </button>
                         {pageNumbers.map((number) => (
                             <button
                                 key={number}
-                                className={`btn mx-1 ${currentPage === number ? "btn-primary" : "btn-outline-primary"
-                                    }`}
-                                onClick={() => handlePageClick(number)}>
+                                className={`pagination-number ${currentPage === number ? "active" : ""}`}
+                                onClick={() => handlePageClick(number)}
+                            >
                                 {number}
                             </button>
                         ))}
                         {pageGroup < totalPageGroups && (
                             <button
-                                className="btn btn-outline-primary mx-1"
+                                className="pagination-button"
                                 onClick={handleNextPageGroup}
                             >
                                 ...
                             </button>
                         )}
                         <button
-                            className="btn btn-primary ms-2"
+                            className="pagination-button"
                             disabled={pageGroup === totalPageGroups}
-                            onClick={handleNextPageGroup}>
+                            onClick={handleNextPageGroup}
+                        >
                             &raquo;
                         </button>
                     </div>

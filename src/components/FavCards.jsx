@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllCards, toggleLike } from "../services/cardsService";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import usePagination from "../../customHooks/usePagination";
+import { SiteTheme } from "../App";
+import "./style/Home.css";
 
 function FavCards({ searchQuery }) {
     const [cards, setCards] = useState([]);
@@ -61,6 +63,8 @@ function FavCards({ searchQuery }) {
         handleNextPageGroup,
         handlePreviousPageGroup,
     } = usePagination(filteredCards);
+
+    const themes = useContext(SiteTheme);
 
     return (
         <div className="container mt-4">

@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div style={{ backgroundColor: darkmode ? '#3D3D3D' : '#E4F2FD' }}>
       <Router>
         <SiteTheme.Provider value={darkmode ? themes.dark : themes.light}>
           <Navbar setSearchQuery={setSearchQuery} user={user} setUser={setUser} darkmode={darkmode} setDarkmode={setDarkmode} />
@@ -52,7 +52,7 @@ function App() {
       </Router>
 
 
-    </>
+    </div >
   )
 }
 

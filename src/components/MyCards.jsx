@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAllCards, toggleLike } from "../services/cardsService";
 import { jwtDecode } from "jwt-decode";
 import DeleteCardModal from "./deleteCardModal";
@@ -6,6 +6,8 @@ import UpdateCardModal from "./updateCardModal";
 import AddCardModal from "./AddCardModal";
 import { Link } from "react-router-dom";
 import usePagination from "../../customHooks/usePagination";
+import { SiteTheme } from "../App";
+import "./style/Home.css";
 
 function MyCards({ searchQuery }) {
     const [cards, setCards] = useState([]);
@@ -77,6 +79,8 @@ function MyCards({ searchQuery }) {
         handleNextPageGroup,
         handlePreviousPageGroup,
     } = usePagination(filteredCards);
+
+    const themes = useContext(SiteTheme);
 
     return (
         <div className="container mt-4">

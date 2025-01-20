@@ -38,7 +38,7 @@ const themes = {
             }
         },
         page: {
-            bgColor: '#1E1E1E',
+            bgColor: '#3D3D3D',
             textColor: '#FDFDFD'
         },
         card: {
