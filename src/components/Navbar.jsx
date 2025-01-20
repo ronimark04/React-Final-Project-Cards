@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import LogoutModal from "./LogoutModal";
 import { getUserById } from "../services/userService";
 import navbarLogo from "../assets/navbarLogo.png";
+import { SiteTheme } from "../App";
+import "./style/Navbar.css";
 
 function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
     const [openLogoutModal, setOpenLogoutModal] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const location = useLocation();
     const [profileImg, setProfileImg] = useState({});
+    const navigate = useNavigate();
 
     if (user) {
         getUserById(user._id).then((res) => {
@@ -34,56 +37,82 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
         setUser(null);
     };
 
-    return (
-        <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid d-flex align-items-center">
-                    <img src={navbarLogo} alt="Logo" style={{ height: "40px" }} />
-                    <div className="d-flex me-auto">
-                        <NavLink className="me-4" to="/home">Home</NavLink>
-                        <NavLink className="me-4" to="/about">About</NavLink>
-                        {user && <NavLink className="me-4" to="/profile">Profile</NavLink>}
-                        {user && <NavLink className="me-4" to="/fav-cards">Fav Cards</NavLink>}
-                        {user && user.isBusiness && <NavLink className="me-4" to="/my-cards">My Cards</NavLink>}
-                    </div>
+    const themes = useContext(SiteTheme);
 
-                    <div className="d-flex align-items-center">
-                        <div className="d-flex me-4">
-                            <input
-                                className="form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                                value={searchInput}
-                                onChange={handleSearchChange}
-                            />
-                        </div>
-
-                        {darkmode ? (<i
-                            className="fa-solid fa-sun"
-                            onClick={() => {
-                                setDarkmode(!darkmode)
-                            }}
-                            style={{ cursor: "pointer" }}
-                        ></i>) :
-                            (<i
-                                className="fa-solid fa-moon"
-                                onClick={() => {
-                                    setDarkmode(!darkmode)
-
-                                }}
-                                style={{ cursor: "pointer" }} ></i>)}
-
-                        {user && <NavLink className="me-4" to="/profile"><img src={profileImg.url} alt={profileImg.alt} style={{ height: "40px", borderRadius: "50%" }} /></NavLink>}
-                        {!user && <NavLink className="me-4" to="/register">Sign Up</NavLink>}
-                        {!user && <NavLink className="me-4" to="/login">Login</NavLink>}
-                        {user && <NavLink className="me-4" onClick={() => { setOpenLogoutModal(true) }}>Logout</NavLink>}
-                    </div>
+    return (<>
+        <nav
+            className="navbar"
+            style={{
+                backgroundColor: themes.navbar.bgColor,
+                color: themes.navbar.textColor,
+            }}
+        >
+            <div className="navbar-container">
+                <img
+                    src={navbarLogo}
+                    alt="Logo"
+                    className="navbar-logo"
+                    onClick={() => navigate("/home")}
+                />
+                <div className="navbar-links">
+                    <NavLink to="/home">Home</NavLink>
+                    <NavLink to="/about">About</NavLink>
+                    {user && <NavLink to="/profile">Profile</NavLink>}
+                    {user && <NavLink to="/fav-cards">Fav Cards</NavLink>}
+                    {user && user.isBusiness && (
+                        <NavLink to="/my-cards">My Cards</NavLink>
+                    )}
                 </div>
-            </nav>
-            <LogoutModal show={openLogoutModal} onHide={() => { setOpenLogoutModal(false) }} requestRender={requestRender} />
-        </>
+                <div className="navbar-controls">
+                    <input
+                        type="search"
+                        className="search-bar"
+                        placeholder="Search"
+                        value={searchInput}
+                        onChange={handleSearchChange}
+                        style={{
+                            backgroundColor: themes.navbar.searchBar.bgColor,
+                            color: themes.navbar.searchBar.textColor,
+                            borderColor: themes.navbar.searchBar.borderColor,
+                        }}
+                    />
+                    <i
+                        className={`fa-solid ${darkmode ? "fa-sun" : "fa-moon"
+                            } darkmode-toggle`}
+                        onClick={() => setDarkmode(!darkmode)}
+                        style={{ color: themes.navbar.darkmodeToggleColor }}
+                    ></i>
+                    {user ? (
+                        <NavLink to="/profile">
+                            <img
+                                src={profileImg.url}
+                                alt={profileImg.alt}
+                                className="profile-img"
+                            />
+                        </NavLink>
+                    ) : (
+                        <div className="auth-links">
+                            <NavLink to="/register">Sign Up</NavLink>
+                            <NavLink to="/login">Login</NavLink>
+                        </div>
+                    )}
+                    {user && (<div className="auth-links">
+                        <NavLink
+                            to="#"
+                            onClick={() => setOpenLogoutModal(true)}
+                        >
+                            Logout
+                        </NavLink>
+                    </div>
+                    )}
+                </div>
+            </div>
+        </nav>
+        <LogoutModal show={openLogoutModal} onHide={() => { setOpenLogoutModal(false) }} requestRender={requestRender} />
+    </>
     );
+
+
 
 }
 

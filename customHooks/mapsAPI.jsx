@@ -1,7 +1,6 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
 const createGoogleMap = async (address) => {
-    // Geocode the address
     const geocodeAddress = async () => {
         const fullAddress = `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}, ${address.country}`;
         try {

@@ -3,6 +3,7 @@ const themes = {
         navbar: {
             bgColor: '#1D74D5',
             textColor: '#F5FBFF',
+            darkmodeToggleColor: "#0B3660",
             searchBar: {
                 bgColor: '#E4F2FD',
                 textColor: '#83919C',
@@ -29,6 +30,7 @@ const themes = {
         navbar: {
             bgColor: '#272727',
             textColor: '#F8F8F8',
+            darkmodeToggleColor: "#FEFEFE",
             searchBar: {
                 bgColor: '#333333',
                 textColor: '#919191',

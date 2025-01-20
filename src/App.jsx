@@ -15,7 +15,7 @@ import { jwtDecode } from 'jwt-decode';
 import Footer from './components/Footer';
 import themes from '../customHooks/darkmode';
 
-export const SiteTheme = createContext(themes.light);
+export let SiteTheme = createContext();
 
 function App() {
   const [darkmode, setDarkmode] = useState(false);

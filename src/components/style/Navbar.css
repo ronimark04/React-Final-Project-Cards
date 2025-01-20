@@ -1,0 +1,82 @@
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Navbar Logo */
+.navbar-logo {
+    height: 40px;
+    cursor: pointer;
+}
+
+/* Navbar Links */
+.navbar-links,
+.auth-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.navbar-links a,
+.auth-links a {
+    text-decoration: none;
+    font-weight: 600;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover,
+.auth-links a:hover {
+    opacity: 0.8;
+}
+
+/* Navbar Controls */
+.navbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+/* Search Bar */
+.search-bar {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid;
+    outline: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.search-bar::placeholder {
+    opacity: 0.6;
+}
+
+/* Darkmode Toggle */
+.darkmode-toggle {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    width: 25px;
+}
+
+/* Profile Image */
+.profile-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
