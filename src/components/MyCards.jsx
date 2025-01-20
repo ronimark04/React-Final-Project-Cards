@@ -83,101 +83,110 @@ function MyCards({ searchQuery }) {
     const themes = useContext(SiteTheme);
 
     return (
-        <div className="container mt-4">
-            <h1>My Cards</h1>
-            <button className="btn btn-primary mb-3" onClick={() => setOpenAddModal(true)}>
+        <div className="home-container">
+            <h1 className="home-title" style={{ color: themes.page.textColor }}>My Cards</h1>
+            <button className="btn btn-dark" style={{ backgroundColor: themes.navbar.bgColor }} onClick={() => setOpenAddModal(true)}>
                 Create New Card
             </button>
             {isLoading ? (
-                <div className="spinner-border text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
+                <div className="spinner-container">
+                    <div className="spinner"></div>
                 </div>
             ) : (
-                <>{currentCards.length > 0 ? (
-                    <div className="row">
-                        {currentCards.map((card) => (
-                            <div className="col-md-4 col-sm-6 mb-4" key={card._id}>
-                                <div className="card" style={{ width: "100%" }}>
-                                    <Link to={`/home/${card._id}`}><img
-                                        className="card-img-top"
+                <>
+                    {currentCards.length > 0 ? (
+                        <div className="card-grid">
+                            {currentCards.map((card) => (
+                                <div className="card" key={card._id} style={{
+                                    backgroundColor: themes.card.bgColor,
+                                    color: themes.card.textColor
+                                }}>
+                                    <img
+                                        className="card-img"
                                         src={card.image.url}
                                         alt={card.image.alt}
-                                        style={{ height: "200px", objectFit: "cover" }} /></Link>
+                                    />
                                     <div className="card-body">
-                                        <Link to={`/home/${card._id}`}><h4 className="card-title">{card.title}</h4></Link>
-                                        <h6 className="card-title">{card.subtitle}</h6>
+                                        <h4 className="card-title">{card.title}</h4>
+                                        <h6 className="card-subtitle">{card.subtitle}</h6>
                                         <p className="card-text">{card.phone}</p>
                                         <p className="card-text">
                                             {card.address.country}, {card.address.city},{" "}
                                             {card.address.street} {card.address.houseNumber}
                                         </p>
                                         <p className="card-text">{card.email}</p>
-                                        <div
-                                            className="icons"
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "space-between",
-                                            }}><div
-                                                style={{
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() => handleToggleLike(card)}>
+                                        <div className="card-icons">
+                                            <div
+                                                className="like-icon"
+                                                onClick={() => handleToggleLike(card)}
+                                            >
                                                 {user && card.likes.includes(user._id) ? (
-                                                    <i className="fa-solid fa-heart text-danger" style={{ cursor: "pointer" }}></i>
+                                                    <i className="fa-solid fa-heart text-danger"></i>
                                                 ) : (
-                                                    <i className="fa-regular fa-heart" style={{ cursor: "pointer" }}></i>
+                                                    <i className="fa-regular fa-heart"></i>
                                                 )}
-                                                <p>{card.likes.length}</p></div>
+                                                <p>{card.likes.length}</p>
+                                            </div>
                                             <i
-                                                className="fa-solid fa-pencil"
-                                                style={{ cursor: "pointer" }}
+                                                className="fa-solid fa-pencil edit-icon"
                                                 onClick={() => {
                                                     setOpenUpdateModal(true);
                                                     setCardId(card._id);
-                                                }}></i><i
-                                                    className="fa-regular fa-trash-can"
-                                                    style={{ cursor: "pointer" }}
-                                                    onClick={() => {
-                                                        setOpenDeleteModal(true);
-                                                        setCardId(card._id);
-                                                        setBizNumber(card.bizNumber);
-                                                    }}></i>
+                                                }}
+                                                style={{ cursor: "pointer" }}
+                                            ></i>
+                                            <i
+                                                className="fa-regular fa-trash-can delete-icon"
+                                                onClick={() => {
+                                                    setOpenDeleteModal(true);
+                                                    setCardId(card._id);
+                                                    setBizNumber(card.bizNumber);
+                                                }}
+                                                style={{ cursor: "pointer" }}
+                                            ></i>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p>No cards found</p>
-                )}
-                    <div className="pagination-controls mt-4 d-flex justify-content-center align-items-center">
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-cards-message">You haven’t created any cards yet</p>
+                    )}
+                    <div className="pagination-controls">
                         <button
-                            className="btn btn-primary me-2"
+                            className="pagination-button"
                             disabled={pageGroup === 1}
-                            onClick={handlePreviousPageGroup}>
-                            &laquo;</button>
+                            onClick={handlePreviousPageGroup}
+                            style={{ color: themes.page.textColor }}
+                        >
+                            &laquo;
+                        </button>
                         {pageNumbers.map((number) => (
                             <button
                                 key={number}
-                                className={`btn mx-1 ${currentPage === number ? "btn-primary" : "btn-outline-primary"
+                                className={`pagination-number ${currentPage === number ? "active" : ""
                                     }`}
-                                onClick={() => handlePageClick(number)}>
-                                {number}</button>
+                                onClick={() => handlePageClick(number)}
+                                style={{ color: themes.page.textColor }}
+                            >
+                                {number}
+                            </button>
                         ))}
                         {pageGroup < totalPageGroups && (
                             <button
-                                className="btn btn-outline-primary mx-1"
-                                onClick={handleNextPageGroup}>
+                                className="pagination-button"
+                                onClick={handleNextPageGroup}
+                                style={{ color: themes.page.textColor }}
+                            >
                                 ...
                             </button>
                         )}
                         <button
-                            className="btn btn-primary ms-2"
+                            className="pagination-button"
                             disabled={pageGroup === totalPageGroups}
-                            onClick={handleNextPageGroup}>
+                            onClick={handleNextPageGroup}
+                            style={{ color: themes.page.textColor }}
+                        >
                             &raquo;
                         </button>
                     </div>
@@ -186,19 +195,24 @@ function MyCards({ searchQuery }) {
                         onHide={() => setOpenDeleteModal(false)}
                         requestRender={requestRender}
                         cardId={cardId}
-                        bizNumber={bizNumber} />
+                        bizNumber={bizNumber}
+                    />
                     <UpdateCardModal
                         show={openUpdateModal}
                         onHide={() => setOpenUpdateModal(false)}
                         requestRender={requestRender}
-                        cardId={cardId} />
+                        cardId={cardId}
+                    />
                     <AddCardModal
                         show={openAddModal}
                         onHide={() => setOpenAddModal(false)}
-                        requestRender={requestRender} /></>
+                        requestRender={requestRender}
+                    />
+                </>
             )}
         </div>
     );
+
 }
 
 export default MyCards;

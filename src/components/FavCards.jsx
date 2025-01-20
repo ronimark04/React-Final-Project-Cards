@@ -67,95 +67,86 @@ function FavCards({ searchQuery }) {
     const themes = useContext(SiteTheme);
 
     return (
-        <div className="container mt-4">
-            <h1>Favorite Cards</h1>
-
+        <div className="home-container">
+            <h1 className="home-title" style={{ marginBottom: "20px", color: themes.page.textColor }}>Favorite Cards</h1>
             {isLoading ? (
-                <div className="spinner-border text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
+                <div className="spinner-container">
+                    <div className="spinner"></div>
                 </div>
             ) : (
                 <>
                     {currentCards.length > 0 ? (
-                        <div className="row">
+                        <div className="card-grid">
                             {currentCards.map((card) => (
-                                <div className="col-md-4 col-sm-6 mb-4" key={card._id}>
-                                    <div className="card" style={{ width: "100%" }}>
-                                        <Link to={`/home/${card._id}`}><img
-                                            className="card-img-top"
-                                            src={card.image.url}
-                                            alt={card.image.alt}
-                                            style={{ height: "200px", objectFit: "cover" }}
-                                        /></Link>
-                                        <div className="card-body">
-                                            <Link to={`/home/${card._id}`}><h4 className="card-title">{card.title}</h4></Link>
-                                            <h6 className="card-title">{card.subtitle}</h6>
-                                            <p className="card-text">{card.phone}</p>
-                                            <p className="card-text">
-                                                {card.address.country}, {card.address.city},{" "}
-                                                {card.address.street} {card.address.houseNumber}
-                                            </p>
-                                            <p className="card-text">{card.email}</p>
+                                <div className="card" key={card._id} style={{
+                                    backgroundColor: themes.card.bgColor,
+                                    color: themes.card.textColor
+                                }}>
+                                    <img
+                                        className="card-img"
+                                        src={card.image.url}
+                                        alt={card.image.alt}
+                                    />
+                                    <div className="card-body">
+                                        <h4 className="card-title">{card.title}</h4>
+                                        <h6 className="card-subtitle">{card.subtitle}</h6>
+                                        <p className="card-text">{card.phone}</p>
+                                        <p className="card-text">
+                                            {card.address.country}, {card.address.city},{" "}
+                                            {card.address.street} {card.address.houseNumber}
+                                        </p>
+                                        <p className="card-text">{card.email}</p>
+                                        <div className="card-icons">
                                             <div
-                                                className="d-flex justify-content-between align-items-center mt-3"
-                                                style={{ width: "100%" }}
+                                                className="like-icon"
+                                                onClick={() => handleToggleLike(card)}
                                             >
-                                                <div
-                                                    style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}
-                                                    onClick={() => handleToggleLike(card)}
-                                                >
-                                                    {user && card.likes.includes(user._id) ? (
-                                                        <i className="fa-solid fa-heart text-danger"></i>
-                                                    ) : (
-                                                        <i className="fa-regular fa-heart"></i>
-                                                    )}
-                                                    <span>{card.likes?.length || 0}</span>
-                                                </div>
-                                                <a href={`tel:${card.phone}`}>
-                                                    <i className="fa-solid fa-phone" style={{ fontSize: "1.2rem", color: "#007bff", cursor: "pointer" }}></i>
-                                                </a>
+                                                {user && card.likes.includes(user._id) ? (
+                                                    <i className="fa-solid fa-heart text-danger"></i>
+                                                ) : (
+                                                    <i className="fa-regular fa-heart"></i>
+                                                )}
+                                                <p>{card.likes.length}</p>
                                             </div>
-
+                                            <a href={`tel:${card.phone}`} className="phone-icon">
+                                                <i className="fa-solid fa-phone"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <p>No favorite cards found</p>
+                        <p className="no-cards-message">No favorite cards found</p>
                     )}
-
-                    <div className="pagination-controls mt-4 d-flex justify-content-center align-items-center">
+                    <div className="pagination-controls">
                         <button
-                            className="btn btn-primary me-2"
+                            className="pagination-button"
                             disabled={pageGroup === 1}
                             onClick={handlePreviousPageGroup}
                         >
                             &laquo;
                         </button>
-
                         {pageNumbers.map((number) => (
                             <button
                                 key={number}
-                                className={`btn mx-1 ${currentPage === number ? "btn-primary" : "btn-outline-primary"
+                                className={`pagination-number ${currentPage === number ? "active" : ""
                                     }`}
                                 onClick={() => handlePageClick(number)}
                             >
                                 {number}
                             </button>
                         ))}
-
                         {pageGroup < totalPageGroups && (
                             <button
-                                className="btn btn-outline-primary mx-1"
+                                className="pagination-button"
                                 onClick={handleNextPageGroup}
                             >
                                 ...
                             </button>
                         )}
-
                         <button
-                            className="btn btn-primary ms-2"
+                            className="pagination-button"
                             disabled={pageGroup === totalPageGroups}
                             onClick={handleNextPageGroup}
                         >
@@ -166,6 +157,7 @@ function FavCards({ searchQuery }) {
             )}
         </div>
     );
+
 }
 
 export default FavCards;

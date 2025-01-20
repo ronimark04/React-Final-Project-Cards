@@ -81,8 +81,8 @@ function Home({ searchQuery }) {
         <div
             className="home-container"
         >
-            <h1 className="home-title">Cards Page</h1>
-            <h2 className="home-subtitle">Here you can find business cards from all categories</h2>
+            <h1 className="home-title" style={{ color: themes.page.textColor }}>Cards Page</h1>
+            <h2 className="home-subtitle" style={{ color: themes.page.textColor }}>Here you can find business cards from all categories</h2>
             {isLoading ? (
                 <div className="spinner-container">
                     <div className="spinner"></div>
