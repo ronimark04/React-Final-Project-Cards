@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as yup from "yup";
 import { jwtDecode } from "jwt-decode";
 import { getUserById, updateUser, patchIsBusiness } from "../services/userService";
 import userValidationSchema from "../../customHooks/userValidationSchema";
+import "./style/Profile.css";
+import { SiteTheme } from "../App";
 
 function Profile({ setUser }) {
     const [localUser, setLocalUser] = useState(null);
@@ -64,210 +66,195 @@ function Profile({ setUser }) {
         }
     }, [localUser]);
 
-    return (<><div className="container">
-        <h4 className="display-4 my-2">Profile</h4>
-        {isLoading ? (
-            <div className="spinner-container">
-                <div className="spinner"></div>
-            </div>
-        ) : (
-            <form onSubmit={formik.handleSubmit}>
-                <div className="row">
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="name.first"
-                            placeholder="First Name"
-                            value={formik.values.name.first}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="name.first">First Name</label>
-                        {formik.touched.name?.first && formik.errors.name?.first && (
-                            <p className="text-danger">{formik.errors.name.first}</p>
-                        )}
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="name.middle"
-                            placeholder="Middle Name (Optional)"
-                            value={formik.values.name.middle}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="name.middle">Middle Name</label>
-                        {formik.touched.name?.middle && formik.errors.name?.middle && (
-                            <p className="text-danger">{formik.errors.name.middle}</p>
-                        )}
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="name.last"
-                            placeholder="Last Name"
-                            value={formik.values.name.last}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="name.last">Last Name</label>
-                        {formik.touched.name?.last && formik.errors.name?.last && (
-                            <p className="text-danger">{formik.errors.name.last}</p>
-                        )}
-                    </div>
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="tel"
-                        className="form-control"
-                        id="phone"
-                        placeholder="Phone Number"
-                        value={formik.values.phone}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur} />
-                    <label htmlFor="phone">Phone Number</label>
-                    {formik.touched.phone && formik.errors.phone && (
-                        <p className="text-danger">{formik.errors.phone}</p>
-                    )}
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="url"
-                        className="form-control"
-                        id="image.url"
-                        placeholder="Profile Image URL"
-                        value={formik.values.image.url}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur} />
-                    <label htmlFor="image.url">Profile Image URL</label>
-                    {formik.touched.image?.url && formik.errors.image?.url && (
-                        <p className="text-danger">{formik.errors.image.url}</p>
-                    )}
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="image.alt"
-                        placeholder="Image Description"
-                        value={formik.values.image.alt}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur} />
-                    <label htmlFor="image.alt">Image Description</label>
-                    {formik.touched.image?.alt && formik.errors.image?.alt && (
-                        <p className="text-danger">{formik.errors.image.alt}</p>
-                    )}
-                </div>
-                <div className="row">
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="address.state"
-                            placeholder="State"
-                            value={formik.values.address.state}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.state">State</label>
-                        {formik.touched.address?.state && formik.errors.address?.state && (
-                            <p className="text-danger">{formik.errors.address.state}</p>
-                        )}
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="address.country"
-                            placeholder="Country"
-                            value={formik.values.address.country}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.country">Country</label>
-                        {formik.touched.address?.country && formik.errors.address?.country && (
-                            <p className="text-danger">{formik.errors.address.country}</p>
-                        )}
-                    </div>
-                    <div className="col-md-4 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="address.city"
-                            placeholder="City"
-                            value={formik.values.address.city}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.city">City</label>
-                        {formik.touched.address?.city && formik.errors.address?.city && (
-                            <p className="text-danger">{formik.errors.address.city}</p>
-                        )}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="address.street"
-                            placeholder="Street"
-                            value={formik.values.address.street}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.street">Street</label>
-                        {formik.touched.address?.street && formik.errors.address?.street && (
-                            <p className="text-danger">{formik.errors.address.street}</p>
-                        )}
-                    </div>
-                    <div className="col-md-3 mb-3">
-                        <input
-                            type="number"
-                            className="form-control"
-                            id="address.houseNumber"
-                            placeholder="House Number"
-                            value={formik.values.address.houseNumber}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.houseNumber">House Number</label>
-                        {formik.touched.address?.houseNumber && formik.errors.address?.houseNumber && (
-                            <p className="text-danger">{formik.errors.address.houseNumber}</p>
-                        )}
-                    </div>
-                    <div className="col-md-3 mb-3">
-                        <input
-                            type="number"
-                            className="form-control"
-                            id="address.zip"
-                            placeholder="ZIP Code"
-                            value={formik.values.address.zip}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} />
-                        <label htmlFor="address.zip">ZIP Code</label>
-                        {formik.touched.address?.zip && formik.errors.address?.zip && (
-                            <p className="text-danger">{formik.errors.address.zip}</p>
-                        )}
-                    </div>
-                </div>
-                <div className="form-check mb-3">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="isBusiness"
-                        checked={formik.values.isBusiness}
-                        onChange={formik.handleChange} />
-                    <label className="form-check-label" htmlFor="isBusiness">
-                        Business Account?
-                    </label>
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary mb-3"
-                    disabled={!formik.dirty || (!Object.keys(formik.touched).length && formik.values.isBusiness === localUser.isBusiness) || !formik.isValid}>
-                    Update Details
-                </button>
-            </form>
-        )}
+    const themes = useContext(SiteTheme);
 
-    </div>
-    </>
+    return (
+        <div className="profile-container" style={{ color: themes.page.textColor }}>
+            <h4 className="profile-title">Profile</h4>
+            {isLoading ? (
+                <div className="spinner-container">
+                    <div className="spinner"></div>
+                </div>
+            ) : (
+                <form onSubmit={formik.handleSubmit} className="profile-form">
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="name.first">First Name *</label>
+                            <input
+                                type="text"
+                                id="name.first"
+                                value={formik.values.name.first}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`form-input ${formik.touched.name?.first && formik.errors.name?.first ? "form-error" : ""}`}
+                            />
+                            {formik.touched.name?.first && formik.errors.name?.first && (
+                                <p className="error-message">{formik.errors.name.first}</p>
+                            )}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="name.middle">Middle Name</label>
+                            <input
+                                type="text"
+                                id="name.middle"
+                                value={formik.values.name.middle}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="name.last">Last Name *</label>
+                            <input
+                                type="text"
+                                id="name.last"
+                                value={formik.values.name.last}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`form-input ${formik.touched.name?.last && formik.errors.name?.last ? "form-error" : ""}`}
+                            />
+                            {formik.touched.name?.last && formik.errors.name?.last && (
+                                <p className="error-message">{formik.errors.name.last}</p>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone *</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                value={formik.values.phone}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className={`form-input ${formik.touched.phone && formik.errors.phone ? "form-error" : ""}`}
+                            />
+                            {formik.touched.phone && formik.errors.phone && (
+                                <p className="error-message">{formik.errors.phone}</p>
+                            )}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="image.url">Image URL</label>
+                            <input
+                                type="url"
+                                id="image.url"
+                                value={formik.values.image.url}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="image.alt">Image Description</label>
+                            <input
+                                type="text"
+                                id="image.alt"
+                                value={formik.values.image.alt}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="address.state">State</label>
+                            <input
+                                type="text"
+                                id="address.state"
+                                value={formik.values.address.state}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="address.country">Country *</label>
+                            <input
+                                type="text"
+                                id="address.country"
+                                value={formik.values.address.country}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="address.city">City *</label>
+                            <input
+                                type="text"
+                                id="address.city"
+                                value={formik.values.address.city}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="address.street">Street *</label>
+                            <input
+                                type="text"
+                                id="address.street"
+                                value={formik.values.address.street}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="address.houseNumber">House Number *</label>
+                            <input
+                                type="number"
+                                id="address.houseNumber"
+                                value={formik.values.address.houseNumber}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="address.zip">ZIP Code</label>
+                            <input
+                                type="number"
+                                id="address.zip"
+                                value={formik.values.address.zip}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="form-input"
+                            />
+                        </div>
+                    </div>
+                    <div className="button-and-checkbox-container">
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="isBusiness">Business Account?</label>
+                                <input
+                                    type="checkbox"
+                                    id="isBusiness"
+                                    checked={formik.values.isBusiness}
+                                    onChange={formik.handleChange}
+                                    className="form-checkbox"
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="btn btn-dark"
+                            style={{ backgroundColor: themes.navbar.bgColor }}
+                            disabled={!formik.dirty || (!Object.keys(formik.touched).length && formik.values.isBusiness === localUser.isBusiness) || !formik.isValid}
+                        >
+                            Update Details
+                        </button>
+                    </div>
+                </form>
+            )}
+        </div>
     );
 }
 
