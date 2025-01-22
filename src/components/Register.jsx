@@ -5,6 +5,7 @@ import { login, register } from "../services/userService";
 import userValidationSchema from "../../customHooks/userValidationSchema";
 import { SiteTheme } from "../App";
 import { useContext } from "react";
+import "./style/Profile.css";
 
 function Register() {
     const navigate = useNavigate();

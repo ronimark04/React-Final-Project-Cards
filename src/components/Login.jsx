@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { login } from "../services/userService";
 import { jwtDecode } from "jwt-decode";
+import { useContext } from "react";
+import { SiteTheme } from "../App";
+import "./style/Login.css";
 
 function Login({ setUser }) {
     const navigate = useNavigate();
@@ -28,42 +31,60 @@ function Login({ setUser }) {
         }
     });
 
-    return (<>
-        <div className="container">
-            <h4 className="display-4 my=2">Login</h4>
-            <form onSubmit={formik.handleSubmit}>
-                <div className="form-floating mb-3">
+    const themes = useContext(SiteTheme);
+
+    return (
+        <div className="login-container" style={{ color: themes.page.textColor }}>
+            <h4 className="login-title">Login</h4>
+            <form onSubmit={formik.handleSubmit} className="login-form">
+                <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
                     <input
                         type="email"
-                        className="form-control"
                         id="email"
                         placeholder="name@example.com"
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur} />
-                    <label htmlFor="floatingInput">Email address</label>
-                    {formik.touched.email && formik.errors.email && (<p className="text-danger">{formik.errors.email}</p>)}
+                        onBlur={formik.handleBlur}
+                        className={`form-input ${formik.touched.email && formik.errors.email ? "form-error" : ""}`}
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                        <p className="error-message">{formik.errors.email}</p>
+                    )}
                 </div>
-                <div className="form-floating mb-3">
+
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
-                        className="form-control"
                         id="password"
                         placeholder="Password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur} />
-                    <label htmlFor="floatingInput">Password</label>
-                    {formik.touched.password && formik.errors.password && (<p className="text-danger">{formik.errors.password}</p>)}
+                        onBlur={formik.handleBlur}
+                        className={`form-input ${formik.touched.password && formik.errors.password ? "form-error" : ""}`}
+                    />
+                    {formik.touched.password && formik.errors.password && (
+                        <p className="error-message">{formik.errors.password}</p>
+                    )}
                 </div>
+
                 <button
                     type="submit"
-                    className="btn btn-primary w-100 mb-3"
-                    disabled={!formik.dirty || !formik.isValid}>Login</button>
-                <Link to="/register" className="btn btn-link">New User? Register Now</Link>
+                    className="btn-dark"
+                    style={{ backgroundColor: themes.navbar.bgColor }}
+                    disabled={!formik.dirty || !formik.isValid}
+                >
+                    Login
+                </button>
+
+                <Link to="/register" className="login-link">
+                    New User? Register Now
+                </Link>
             </form>
         </div>
-    </>);
+    );
+
 }
 
 export default Login;
