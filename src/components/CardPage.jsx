@@ -49,7 +49,6 @@ function CardPage() {
                 }
             }
         };
-
         fetchMap();
     }, [card]);
 

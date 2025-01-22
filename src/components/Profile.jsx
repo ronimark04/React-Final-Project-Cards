@@ -8,7 +8,7 @@ import "./style/Profile.css";
 import { SiteTheme } from "../App";
 import { toast } from "react-toastify";
 
-function Profile({ setUser, darkmode }) {
+function Profile({ setUser }) {
     const [localUser, setLocalUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -46,7 +46,6 @@ function Profile({ setUser, darkmode }) {
                     } else {
                         setLocalUser(res.data);
                         toast.success("Your profile has been updated successfully");
-
                     }
                 })
                 .catch(err => console.error(err));

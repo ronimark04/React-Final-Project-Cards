@@ -212,7 +212,6 @@ function MyCards({ searchQuery }) {
             )}
         </div>
     );
-
 }
 
 export default MyCards;

@@ -4,10 +4,7 @@
     box-sizing: border-box;
 }
 
-
-
 .home-container {
-    /* padding: 2rem; */
     transition: background-color 0.3s, color 0.3s;
     margin: 0px 400px 0px 400px;
     display: flex;
@@ -38,7 +35,6 @@
     color: inherit;
 }
 
-/* Spinner */
 .spinner-container {
     display: flex;
     justify-content: center;
@@ -65,12 +61,10 @@
     }
 }
 
-/* Card Grid */
 .card-grid {
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(3, 1fr);
-    /* Default: 3 cards per row */
 }
 
 @media (max-width: 1600px) {
@@ -89,7 +83,6 @@
 @media (max-width: 992px) {
     .card-grid {
         grid-template-columns: repeat(2, 1fr);
-        /* 2 cards per row on medium screens */
     }
 
     .home-container {
@@ -100,7 +93,6 @@
 @media (max-width: 576px) {
     .card-grid {
         grid-template-columns: 1fr;
-        /* 1 card per row on small/mobile screens */
     }
 
     .home-container {
@@ -108,7 +100,6 @@
     }
 }
 
-/* Card Styles */
 .card {
     background-color: var(--card-bg);
     border-radius: 8px;
@@ -166,7 +157,6 @@
     font-size: 1.2rem;
     cursor: pointer;
     gap: 0.3rem;
-    /* Space between icon and like count */
 }
 
 .like-icon p {
@@ -184,14 +174,12 @@
     color: var(--hover-color);
 }
 
-/* No Cards Message */
 .no-cards-message {
     text-align: center;
     font-size: 1.5rem;
     color: var(--text-muted);
 }
 
-/* Pagination Controls */
 .pagination-controls {
     display: flex;
     justify-content: center;

@@ -9,7 +9,6 @@ import { SiteTheme } from "../App";
 import "./style/Home.css";
 import { toast } from "react-toastify";
 
-
 function Home({ searchQuery }) {
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(true);

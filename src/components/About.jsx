@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { SiteTheme } from "../App";
 
 function About() {
-
     const themes = useContext(SiteTheme);
 
     return (

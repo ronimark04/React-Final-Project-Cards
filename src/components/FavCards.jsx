@@ -37,7 +37,6 @@ function FavCards({ searchQuery }) {
 
     const handleToggleLike = (card) => {
         if (!user) return;
-
         toggleLike(card._id, user._id)
             .then(() => {
                 if (card.likes.includes(user._id)) {
@@ -161,7 +160,6 @@ function FavCards({ searchQuery }) {
             )}
         </div>
     );
-
 }
 
 export default FavCards;

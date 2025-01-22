@@ -123,9 +123,6 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
         <LogoutModal show={openLogoutModal} onHide={() => { setOpenLogoutModal(false) }} requestRender={requestRender} />
     </>
     );
-
-
-
 }
 
 export default Navbar;

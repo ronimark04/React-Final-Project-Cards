@@ -91,197 +91,202 @@ const UpdateCard = forwardRef(({ cardId, onHide, requestRender }, ref) => {
         }
     }, [card]);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div className="container mt-4">
-            <form onSubmit={formik.handleSubmit}>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            id="title"
-                            name="title"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.title}
-                        />
-                        {formik.errors.title ? <div className="text-danger">{formik.errors.title}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="subtitle">Subtitle</label>
-                        <input
-                            id="subtitle"
-                            name="subtitle"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.subtitle}
-                        />
-                        {formik.errors.subtitle ? <div className="text-danger">{formik.errors.subtitle}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12 mb-3">
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.description}
-                        />
-                        {formik.errors.description ? <div className="text-danger">{formik.errors.description}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="phone">Phone</label>
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.phone}
-                        />
-                        {formik.errors.phone ? <div className="text-danger">{formik.errors.phone}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                        {formik.errors.email ? <div className="text-danger">{formik.errors.email}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="web">Web</label>
-                        <input
-                            id="web"
-                            name="web"
-                            type="url"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.web}
-                        />
-                        {formik.errors.web ? <div className="text-danger">{formik.errors.web}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="image.url">Image URL</label>
-                        <input
-                            id="image.url"
-                            name="image.url"
-                            type="url"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.image.url}
-                        />
-                        {formik.errors.image?.url ? <div className="text-danger">{formik.errors.image.url}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12 mb-3">
-                        <label htmlFor="image.alt">Image Alt</label>
-                        <input
-                            id="image.alt"
-                            name="image.alt"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.image.alt}
-                        />
-                        {formik.errors.image?.alt ? <div className="text-danger">{formik.errors.image.alt}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.state">State</label>
-                        <input
-                            id="address.state"
-                            name="address.state"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.state}
-                        />
-                        {formik.errors.address?.state ? <div className="text-danger">{formik.errors.address.state}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.country">Country</label>
-                        <input
-                            id="address.country"
-                            name="address.country"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.country}
-                        />
-                        {formik.errors.address?.country ? <div className="text-danger">{formik.errors.address.country}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.city">City</label>
-                        <input
-                            id="address.city"
-                            name="address.city"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.city}
-                        />
-                        {formik.errors.address?.city ? <div className="text-danger">{formik.errors.address.city}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.street">Street</label>
-                        <input
-                            id="address.street"
-                            name="address.street"
-                            type="text"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.street}
-                        />
-                        {formik.errors.address?.street ? <div className="text-danger">{formik.errors.address.street}</div> : null}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.houseNumber">House Number</label>
-                        <input
-                            id="address.houseNumber"
-                            name="address.houseNumber"
-                            type="number"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.houseNumber}
-                        />
-                        {formik.errors.address?.houseNumber ? <div className="text-danger">{formik.errors.address.houseNumber}</div> : null}
-                    </div>
-                    <div className="col-md-6 mb-3">
-                        <label htmlFor="address.zip">Zip</label>
-                        <input
-                            id="address.zip"
-                            name="address.zip"
-                            type="number"
-                            className="form-control"
-                            onChange={formik.handleChange}
-                            value={formik.values.address.zip}
-                        />
-                        {formik.errors.address?.zip ? <div className="text-danger">{formik.errors.address.zip}</div> : null}
-                    </div>
-                </div>
-            </form>
+            {
+                isLoading ? (
+                    <div className="spinner-container" >
+                        <div className="spinner"></div>
+                    </div >
+                ) : (
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="title">Title</label>
+                                <input
+                                    id="title"
+                                    name="title"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.title}
+                                />
+                                {formik.errors.title ? <div className="text-danger">{formik.errors.title}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="subtitle">Subtitle</label>
+                                <input
+                                    id="subtitle"
+                                    name="subtitle"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.subtitle}
+                                />
+                                {formik.errors.subtitle ? <div className="text-danger">{formik.errors.subtitle}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 mb-3">
+                                <label htmlFor="description">Description</label>
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.description}
+                                />
+                                {formik.errors.description ? <div className="text-danger">{formik.errors.description}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="phone">Phone</label>
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.phone}
+                                />
+                                {formik.errors.phone ? <div className="text-danger">{formik.errors.phone}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                />
+                                {formik.errors.email ? <div className="text-danger">{formik.errors.email}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="web">Web</label>
+                                <input
+                                    id="web"
+                                    name="web"
+                                    type="url"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.web}
+                                />
+                                {formik.errors.web ? <div className="text-danger">{formik.errors.web}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="image.url">Image URL</label>
+                                <input
+                                    id="image.url"
+                                    name="image.url"
+                                    type="url"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.image.url}
+                                />
+                                {formik.errors.image?.url ? <div className="text-danger">{formik.errors.image.url}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 mb-3">
+                                <label htmlFor="image.alt">Image Alt</label>
+                                <input
+                                    id="image.alt"
+                                    name="image.alt"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.image.alt}
+                                />
+                                {formik.errors.image?.alt ? <div className="text-danger">{formik.errors.image.alt}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.state">State</label>
+                                <input
+                                    id="address.state"
+                                    name="address.state"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.state}
+                                />
+                                {formik.errors.address?.state ? <div className="text-danger">{formik.errors.address.state}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.country">Country</label>
+                                <input
+                                    id="address.country"
+                                    name="address.country"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.country}
+                                />
+                                {formik.errors.address?.country ? <div className="text-danger">{formik.errors.address.country}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.city">City</label>
+                                <input
+                                    id="address.city"
+                                    name="address.city"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.city}
+                                />
+                                {formik.errors.address?.city ? <div className="text-danger">{formik.errors.address.city}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.street">Street</label>
+                                <input
+                                    id="address.street"
+                                    name="address.street"
+                                    type="text"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.street}
+                                />
+                                {formik.errors.address?.street ? <div className="text-danger">{formik.errors.address.street}</div> : null}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.houseNumber">House Number</label>
+                                <input
+                                    id="address.houseNumber"
+                                    name="address.houseNumber"
+                                    type="number"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.houseNumber}
+                                />
+                                {formik.errors.address?.houseNumber ? <div className="text-danger">{formik.errors.address.houseNumber}</div> : null}
+                            </div>
+                            <div className="col-md-6 mb-3">
+                                <label htmlFor="address.zip">Zip</label>
+                                <input
+                                    id="address.zip"
+                                    name="address.zip"
+                                    type="number"
+                                    className="form-control"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.address.zip}
+                                />
+                                {formik.errors.address?.zip ? <div className="text-danger">{formik.errors.address.zip}</div> : null}
+                            </div>
+                        </div>
+                    </form>
+                )}
+
+
         </div>
 
     );
