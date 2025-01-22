@@ -257,8 +257,8 @@ function Register() {
                     </div>
                     <button
                         type="submit"
-                        className="btn-dark"
-                        style={{ backgroundColor: themes.navbar.bgColor }}
+                        className="btn btn-dark-register"
+                        style={{ backgroundColor: themes.navbar.bgColor, color: themes.navbar.textColor }}
                         disabled={!formik.dirty || !formik.isValid}
                     >
                         Register

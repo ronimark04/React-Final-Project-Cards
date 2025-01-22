@@ -31,6 +31,7 @@
     gap: 5px;
 }
 
+
 .login-link {
     text-align: center;
 }
@@ -78,10 +79,6 @@ label {
     margin-top: 2px;
 }
 
-.button-and-checkbox-container {
-    display: flex;
-    justify-content: space-between;
-}
 
 .button-and-checkbox-container-register {
     display: flex;
@@ -102,25 +99,23 @@ label {
     margin-top: 5px;
 }
 
-.btn-dark {
+.btn-dark-register {
     padding: 10px 20px;
-    color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-end;
-    width: max-content;
 }
 
-.btn-dark:hover {
-    background-color: #0056b3;
+.btn-dark-register:hover {
+    background-color: #1e2d3d !important;
 }
 
-.btn-dark:disabled {
+.btn-dark-register:disabled {
     background-color: #ccc;
+    color: #fff;
     cursor: not-allowed;
 }
 

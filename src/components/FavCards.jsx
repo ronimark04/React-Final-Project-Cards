@@ -124,6 +124,7 @@ function FavCards({ searchQuery }) {
                             className="pagination-button"
                             disabled={pageGroup === 1}
                             onClick={handlePreviousPageGroup}
+                            style={{ color: themes.page.textColor }}
                         >
                             &laquo;
                         </button>
@@ -133,6 +134,7 @@ function FavCards({ searchQuery }) {
                                 className={`pagination-number ${currentPage === number ? "active" : ""
                                     }`}
                                 onClick={() => handlePageClick(number)}
+                                style={{ color: themes.page.textColor }}
                             >
                                 {number}
                             </button>
@@ -141,6 +143,7 @@ function FavCards({ searchQuery }) {
                             <button
                                 className="pagination-button"
                                 onClick={handleNextPageGroup}
+                                style={{ color: themes.page.textColor }}
                             >
                                 ...
                             </button>
@@ -149,6 +152,7 @@ function FavCards({ searchQuery }) {
                             className="pagination-button"
                             disabled={pageGroup === totalPageGroups}
                             onClick={handleNextPageGroup}
+                            style={{ color: themes.page.textColor }}
                         >
                             &raquo;
                         </button>

@@ -229,24 +229,21 @@ function Profile({ setUser }) {
                             />
                         </div>
                     </div>
-                    <div className="button-and-checkbox-container">
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="isBusiness">Business Account?</label>
-                                <input
-                                    type="checkbox"
-                                    id="isBusiness"
-                                    checked={formik.values.isBusiness}
-                                    onChange={formik.handleChange}
-                                    className="form-checkbox"
-                                />
-                            </div>
+                    <div className="button-and-checkbox-container-register">
+                        <div>
+                            <input
+                                type="checkbox"
+                                id="isBusiness"
+                                checked={formik.values.isBusiness}
+                                onChange={formik.handleChange}
+                                className="form-checkbox"
+                            />
+                            <label htmlFor="isBusiness">Business Account?</label>
                         </div>
-
                         <button
                             type="submit"
-                            className="btn btn-dark"
-                            style={{ backgroundColor: themes.navbar.bgColor }}
+                            className="btn btn-dark-register"
+                            style={{ backgroundColor: themes.navbar.bgColor, color: themes.navbar.textColor }}
                             disabled={!formik.dirty || (!Object.keys(formik.touched).length && formik.values.isBusiness === localUser.isBusiness) || !formik.isValid}
                         >
                             Update Details
