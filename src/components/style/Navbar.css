@@ -17,6 +17,7 @@
 .navbar-logo {
     height: 40px;
     cursor: pointer;
+    margin-right: 15px;
 }
 
 .navbar-left-container {
