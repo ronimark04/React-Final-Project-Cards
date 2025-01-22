@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { SiteTheme } from "../App";
+
 function About() {
+
+    const themes = useContext(SiteTheme);
+
     return (
-        <div className="container my-5">
+        <div className="container my-5" style={{ color: themes.page.textColor }}>
             <h1 className="display-4 text-center mb-4">About Us</h1>
             <p className="lead text-center mb-5">
                 Welcome to BusinessCardHub, the platform where businesses connect, grow, and shine.

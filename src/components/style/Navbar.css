@@ -1,6 +1,5 @@
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     transition: background-color 0.3s, color 0.3s;
@@ -20,12 +19,25 @@
     cursor: pointer;
 }
 
+.navbar-left-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-links {
+    position: relative;
+    left: 20px;
+}
+
 .navbar-links,
 .auth-links {
     display: flex;
     gap: 1.5rem;
     font-size: 1.3rem;
 }
+
 
 .navbar-links-dropdown {
     display: none;
@@ -79,7 +91,11 @@
     cursor: pointer;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 1300px) {
+    .navbar-links {
+        display: none;
+    }
+
     .navbar-links {
         display: none;
     }

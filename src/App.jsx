@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: darkmode ? '#3D3D3D' : '#E4F2FD' }}>
+    <div style={{ backgroundColor: darkmode ? '#3D3D3D' : '#E4F2FD', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Router>
         <SiteTheme.Provider value={darkmode ? themes.dark : themes.light}>
           <Navbar setSearchQuery={setSearchQuery} user={user} setUser={setUser} darkmode={darkmode} setDarkmode={setDarkmode} />
@@ -41,7 +41,7 @@ function App() {
             <Route path="/home/:cardId" element={<CardPage />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile setUser={setUser} />} />
             <Route path="/my-cards" element={<MyCards searchQuery={searchQuery} />} />
             <Route path="/fav-cards" element={<FavCards searchQuery={searchQuery} />} />
             <Route path="/about" element={<About />} />

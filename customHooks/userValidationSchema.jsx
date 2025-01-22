@@ -18,7 +18,8 @@ const userValidationSchema = {
         street: yup.string().required().min(2).max(256),
         houseNumber: yup.number().required().min(1),
         zip: yup.number().required().min(1),
-    }).required()
+    }).required(),
+    isBusiness: yup.boolean().required()
 };
 
 export default userValidationSchema;

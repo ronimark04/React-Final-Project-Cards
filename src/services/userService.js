@@ -1,10 +1,8 @@
 import axios from "axios";
 
-
 const api = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users";
 
 export function login(loginData) {
-
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -12,16 +10,13 @@ export function login(loginData) {
         "email": loginData.email,
         "password": loginData.password
     });
-
     const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow"
     };
-
     return fetch(`${api}/login`, requestOptions);
-
 }
 
 export function register(registerData) {
@@ -33,7 +28,6 @@ export function getUserById(userId) {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem('token')
     };
-
     return axios.get(`${api}/${userId}`, { headers });
 }
 
@@ -42,6 +36,13 @@ export function updateUser(userId, userData) {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem('token')
     };
-
     return axios.put(`${api}/${userId}`, userData, { headers });
+}
+
+export function patchIsBusiness(userId, isBusiness) {
+    const headers = {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem('token')
+    };
+    return axios.patch(`${api}/${userId}`, {}, { headers });
 }
