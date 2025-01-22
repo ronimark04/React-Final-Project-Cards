@@ -15,9 +15,14 @@
     align-items: center;
 }
 
-.btn-dark {
+.btn {
     width: 150px;
     margin: 10px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: #1e2d3d !important;
 }
 
 .home-title {

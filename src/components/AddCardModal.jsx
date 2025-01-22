@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import AddCard from "./AddCard";
-// import UpdateCard from "./updateCard";
+import { SiteTheme } from "../App";
 
 function AddCardModal({ show, onHide, requestRender }) {
     const addCardRef = useRef();

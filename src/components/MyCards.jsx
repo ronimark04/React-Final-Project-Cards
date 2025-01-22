@@ -85,7 +85,7 @@ function MyCards({ searchQuery }) {
     return (
         <div className="home-container">
             <h1 className="home-title" style={{ color: themes.page.textColor }}>My Cards</h1>
-            <button className="btn btn-dark" style={{ backgroundColor: themes.navbar.bgColor }} onClick={() => setOpenAddModal(true)}>
+            <button className="btn" style={{ backgroundColor: themes.navbar.bgColor, color: themes.navbar.textColor }} onClick={() => setOpenAddModal(true)}>
                 Create New Card
             </button>
             {isLoading ? (
@@ -100,14 +100,14 @@ function MyCards({ searchQuery }) {
                                 <div className="card" key={card._id} style={{
                                     backgroundColor: themes.card.bgColor,
                                     color: themes.card.textColor
-                                }}>
-                                    <img
-                                        className="card-img"
-                                        src={card.image.url}
-                                        alt={card.image.alt}
-                                    />
+                                }}><Link to={`/home/${card._id}`}>
+                                        <img
+                                            className="card-img"
+                                            src={card.image.url}
+                                            alt={card.image.alt}
+                                        /></Link>
                                     <div className="card-body">
-                                        <h4 className="card-title">{card.title}</h4>
+                                        <Link to={`/home/${card._id}`}><h4 className="card-title">{card.title}</h4></Link>
                                         <h6 className="card-subtitle">{card.subtitle}</h6>
                                         <p className="card-text">{card.phone}</p>
                                         <p className="card-text">

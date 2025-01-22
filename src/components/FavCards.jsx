@@ -82,13 +82,13 @@ function FavCards({ searchQuery }) {
                                     backgroundColor: themes.card.bgColor,
                                     color: themes.card.textColor
                                 }}>
-                                    <img
+                                    <Link to={`/home/${card._id}`}><img
                                         className="card-img"
                                         src={card.image.url}
                                         alt={card.image.alt}
-                                    />
+                                    /></Link>
                                     <div className="card-body">
-                                        <h4 className="card-title">{card.title}</h4>
+                                        <Link to={`/home/${card._id}`}><h4 className="card-title">{card.title}</h4></Link>
                                         <h6 className="card-subtitle">{card.subtitle}</h6>
                                         <p className="card-text">{card.phone}</p>
                                         <p className="card-text">
