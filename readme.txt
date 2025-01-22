@@ -1,4 +1,4 @@
-React Final Project - Business Cards Hub
+React Final Project - BusinessCardHub
 This is my final project for the React portion of a full stack web development course. The project adheres to the course instructions and uses the database provided by the school.
 
 IMPORTANT - To properly view this project please create an .env file in the root directory and enter this line:
