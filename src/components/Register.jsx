@@ -6,6 +6,7 @@ import userValidationSchema from "../../customHooks/userValidationSchema";
 import { SiteTheme } from "../App";
 import { useContext } from "react";
 import "./style/Profile.css";
+import { toast } from "react-toastify";
 
 function Register() {
     const navigate = useNavigate();
@@ -28,12 +29,12 @@ function Register() {
                         .then((token) => {
                             localStorage.setItem("token", token);
                             navigate("/home");
-                            // ADD TOASTIFY HERE LATER
+                            toast(`Welcome ${values.name.first}!`);
                         })
                         .catch((error) => console.error(error));
                 }).catch(err => {
                     if (err.response && err.response.data === "User already registered") {
-                        alert("User already registered, please log in"); //TOASTIFY
+                        toast.error("User already registered, please log in");
                     } else { console.log(err); }
                 });
         }

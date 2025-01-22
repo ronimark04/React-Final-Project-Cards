@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { useLoadScript } from "@react-google-maps/api";
 import createGoogleMap from "../../customHooks/mapsAPI";
 import { SiteTheme } from "../App";
+import { toast } from "react-toastify";
 
 function CardPage() {
     let { cardId } = useParams();
@@ -58,7 +59,7 @@ function CardPage() {
 
     const handleToggleLike = () => {
         if (!user) {
-            alert("To like cards please log in");
+            toast("To like cards please log in to your account or sign up")
             return;
         }
 

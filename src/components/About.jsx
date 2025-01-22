@@ -7,7 +7,7 @@ function About() {
 
     return (
         <div className="container my-5" style={{ color: themes.page.textColor }}>
-            <h1 className="display-4 text-center mb-4">About Us</h1>
+            <h1 className="display-4 text-center mb-4" style={{ marginTop: "-50px", fontWeight: "600", fontSize: "3rem" }}>About Us</h1>
             <p className="lead text-center mb-5">
                 Welcome to BusinessCardHub, the platform where businesses connect, grow, and shine.
             </p>

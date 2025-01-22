@@ -6,16 +6,18 @@ import { getUserById, updateUser, patchIsBusiness } from "../services/userServic
 import userValidationSchema from "../../customHooks/userValidationSchema";
 import "./style/Profile.css";
 import { SiteTheme } from "../App";
+import { toast } from "react-toastify";
 
-function Profile({ setUser }) {
+function Profile({ setUser, darkmode }) {
     const [localUser, setLocalUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         if (localStorage.getItem("token")) {
             getUserById(jwtDecode(localStorage.getItem("token"))._id)
                 .then((res) => { setLocalUser(res.data) })
                 .catch((err) => { console.error(err) })
-                .finally(() => { setIsLoading(false) });
+                .finally(() => { setIsLoading(false); });
         }
     }, []);
 
@@ -38,12 +40,13 @@ function Profile({ setUser }) {
                             .then((res) => {
                                 setLocalUser(res.data);
                                 setUser(res.data); // to make navbar re-render if user's business status changes
-                                alert(`${localUser.name.first} ${localUser.name.last} has been updated successfully`);
+                                toast.success("Your profile has been updated successfully");
                             })
                             .catch((err) => { console.error(err); });
                     } else {
                         setLocalUser(res.data);
-                        alert(`${localUser.name.first} ${localUser.name.last} has been updated successfully`);
+                        toast.success("Your profile has been updated successfully");
+
                     }
                 })
                 .catch(err => console.error(err));

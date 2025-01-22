@@ -2,7 +2,7 @@ import { forwardRef, useContext, useImperativeHandle } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { addCard } from "../services/cardsService";
-import { SiteTheme } from "../App";
+import { toast } from "react-toastify";
 
 const AddCard = forwardRef(({ onHide, requestRender }, ref) => {
     const formik = useFormik({
@@ -42,7 +42,7 @@ const AddCard = forwardRef(({ onHide, requestRender }, ref) => {
                 .then((res) => {
                     requestRender();
                     onHide();
-                    alert(`${values.title} has been added successfully`);
+                    toast.success(`${values.title} has been added successfully`);
                 })
                 .catch(err => console.error(err));
         },

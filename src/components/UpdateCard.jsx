@@ -2,6 +2,7 @@ import { forwardRef, useImperativeHandle, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { getCardById, updateCard } from "../services/cardsService";
+import { toast } from "react-toastify";
 
 const UpdateCard = forwardRef(({ cardId, onHide, requestRender }, ref) => {
     const [card, setCard] = useState(null);
@@ -58,7 +59,7 @@ const UpdateCard = forwardRef(({ cardId, onHide, requestRender }, ref) => {
                 .then((res) => {
                     onHide();
                     requestRender();
-                    alert(`${values.title} has been updated successfully`);
+                    toast.success(`${values.title} has been updated successfully`);
                 })
                 .catch(err => console.error(err));
         },

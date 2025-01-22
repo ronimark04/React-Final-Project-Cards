@@ -1,5 +1,9 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { createContext, useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import Home from './components/Home'
 import Login from './components/Login'
 import MyCards from './components/MyCards'
@@ -9,9 +13,7 @@ import FavCards from './components/FavCards';
 import Register from './components/Register';
 import NotFound from './components/NotFound';
 import Profile from './components/Profile';
-import { createContext, useEffect, useState } from 'react';
 import CardPage from './components/CardPage';
-import { jwtDecode } from 'jwt-decode';
 import Footer from './components/Footer';
 import themes from '../customHooks/darkmode';
 
@@ -35,13 +37,26 @@ function App() {
       <Router>
         <SiteTheme.Provider value={darkmode ? themes.dark : themes.light}>
           <Navbar setSearchQuery={setSearchQuery} user={user} setUser={setUser} darkmode={darkmode} setDarkmode={setDarkmode} />
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme={darkmode ? 'dark' : 'light'}
+            transition={Slide}
+          />
           <Routes>
             <Route path="/" element={<Home searchQuery={searchQuery} />} />
             <Route path="/home" element={<Home searchQuery={searchQuery} />} />
             <Route path="/home/:cardId" element={<CardPage />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile setUser={setUser} />} />
+            <Route path="/profile" element={<Profile setUser={setUser} darkmode={darkmode} />} />
             <Route path="/my-cards" element={<MyCards searchQuery={searchQuery} />} />
             <Route path="/fav-cards" element={<FavCards searchQuery={searchQuery} />} />
             <Route path="/about" element={<About />} />

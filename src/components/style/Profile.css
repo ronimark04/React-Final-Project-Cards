@@ -7,9 +7,9 @@
 
 .profile-title {
     text-align: center;
-    font-size: 38px;
-    font-weight: bold;
+    font-size: 3rem;
     margin-bottom: 20px;
+    margin-top: -20px;
 }
 
 .profile-form {
@@ -107,6 +107,7 @@ label {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: max-content;
 }
 
 .btn-dark-register:hover {

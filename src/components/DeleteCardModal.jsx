@@ -3,6 +3,7 @@ import DeleteCard from "./DeleteCard";
 import { deleteCard, getCardById } from "../services/cardsService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function DeleteCardModal({ show, onHide, requestRender, cardId, bizNumber }) {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ function DeleteCardModal({ show, onHide, requestRender, cardId, bizNumber }) {
             .then((res) => {
                 onHide();
                 requestRender();
-                alert(`${card.title} has been deleted successfully`);
+                toast.success(`${card.title} has been deleted successfully`);
             })
             .catch(err => console.error(err));
     };

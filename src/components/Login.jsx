@@ -5,6 +5,7 @@ import { login } from "../services/userService";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
 import { SiteTheme } from "../App";
+import { toast } from "react-toastify";
 import "./style/Login.css";
 
 function Login({ setUser }) {
@@ -20,14 +21,22 @@ function Login({ setUser }) {
         }),
         onSubmit: values => {
             login(values)
-                .then((response) => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        toast.error("Wrong email or password");
+                        throw new Error("Wrong email or password");
+                    }
+                    return response.text();
+                })
                 .then((token) => {
+                    toast("Welcome back!");
                     localStorage.setItem("token", token);
                     setUser(jwtDecode(token));
                     navigate("/home");
-                    // ADD TOASTIFY HERE
                 })
-                .catch((error) => console.error(error));
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     });
 

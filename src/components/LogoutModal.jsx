@@ -1,6 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 
 function LogoutModal({ onHide, show, requestRender }) {
     const navigate = useNavigate()
@@ -9,6 +9,7 @@ function LogoutModal({ onHide, show, requestRender }) {
         onHide();
         requestRender();
         navigate("/home");
+        toast("You have successfully logged out");
     };
 
     return (

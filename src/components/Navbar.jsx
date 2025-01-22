@@ -14,13 +14,15 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
     const [profileImg, setProfileImg] = useState({});
     const navigate = useNavigate();
 
-    if (user) {
-        getUserById(user._id).then((res) => {
-            setProfileImg({ url: res.data.image.url, alt: res.data.image.alt });
-        }).catch((err) => {
-            console.log(err);
-        });
-    };
+    useEffect(() => {
+        if (user) {
+            getUserById(user._id)
+                .then((res) => {
+                    setProfileImg({ url: res.data.image.url, alt: res.data.image.alt });
+                })
+                .catch((err) => console.error(err));
+        }
+    }, [user]);
 
     useEffect(() => {
         setSearchInput("");

@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import usePagination from "../../customHooks/usePagination";
 import { SiteTheme } from "../App";
 import "./style/Home.css";
+import { toast } from "react-toastify";
+
 
 function Home({ searchQuery }) {
     const [cards, setCards] = useState([]);
@@ -41,7 +43,10 @@ function Home({ searchQuery }) {
     };
 
     const handleToggleLike = (card) => {
-        if (!user) return; // TOASTIFY
+        if (!user) {
+            toast("To like cards please log in to your account or sign up");
+            return;
+        }
 
         toggleLike(card._id, user._id)
             .then(() => {
