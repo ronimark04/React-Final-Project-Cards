@@ -9,22 +9,15 @@ import usePagination from "../../customHooks/usePagination";
 import { SiteTheme } from "../App";
 import "./style/Home.css";
 
-function MyCards({ searchQuery }) {
+function MyCards({ searchQuery, user }) {
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState();
     const [cardId, setCardId] = useState("");
     const [bizNumber, setBizNumber] = useState("");
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false);
     const [openAddModal, setOpenAddModal] = useState(false);
     const [cardsChanged, setCardsChanged] = useState(false);
-
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            setUser(jwtDecode(localStorage.getItem("token")));
-        }
-    }, []);
 
     useEffect(() => {
         if (user) {

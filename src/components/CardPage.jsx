@@ -42,7 +42,7 @@ function CardPage() {
         const fetchMap = async () => {
             if (card && card.address) {
                 try {
-                    const mapFn = await createGoogleMap(card.address, process.env.GOOGLE_MAPS_API_KEY);
+                    const mapFn = await createGoogleMap(card.address, import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
                     setMapComponent(() => mapFn);
                 } catch (error) {
                     console.error("Error creating map:", error);

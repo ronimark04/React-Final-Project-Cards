@@ -55,9 +55,9 @@ function App() {
             <Route path="/home" element={<Home searchQuery={searchQuery} />} />
             <Route path="/home/:cardId" element={<CardPage />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Register setUser={setUser} />} />
             <Route path="/profile" element={<Profile setUser={setUser} darkmode={darkmode} />} />
-            <Route path="/my-cards" element={<MyCards searchQuery={searchQuery} />} />
+            <Route path="/my-cards" element={<MyCards searchQuery={searchQuery} user={user} />} />
             <Route path="/fav-cards" element={<FavCards searchQuery={searchQuery} />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />

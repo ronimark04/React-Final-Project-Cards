@@ -2,13 +2,14 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { login, register } from "../services/userService";
-import userValidationSchema from "../../customHooks/userValidationSchema";
+import { userValidationSchemaForRegister } from "../../customHooks/userValidationSchema";
 import { SiteTheme } from "../App";
 import { useContext } from "react";
 import "./style/Profile.css";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
-function Register() {
+function Register({ setUser }) {
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -20,7 +21,7 @@ function Register() {
             address: { state: "", country: "", city: "", street: "", houseNumber: 0, zip: 0 },
             isBusiness: false,
         },
-        validationSchema: yup.object(userValidationSchema),
+        validationSchema: yup.object(userValidationSchemaForRegister),
         onSubmit: values => {
             register(values)
                 .then(response => {
@@ -28,6 +29,7 @@ function Register() {
                         .then((response) => response.text())
                         .then((token) => {
                             localStorage.setItem("token", token);
+                            setUser(jwtDecode(token));
                             navigate("/home");
                             toast(`Welcome ${values.name.first}!`);
                         })

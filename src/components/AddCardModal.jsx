@@ -12,6 +12,7 @@ function AddCardModal({ show, onHide, requestRender }) {
         }
     };
 
+
     return (
         <Modal
             show={show}

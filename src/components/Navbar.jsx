@@ -41,6 +41,9 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
 
     const themes = useContext(SiteTheme);
 
+    console.log(user);
+
+
     return (<>
         <nav
             className="navbar"

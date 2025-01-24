@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import * as yup from "yup";
 import { jwtDecode } from "jwt-decode";
 import { getUserById, updateUser, patchIsBusiness } from "../services/userService";
-import userValidationSchema from "../../customHooks/userValidationSchema";
+import { userValidationSchema } from "../../customHooks/userValidationSchema";
 import "./style/Profile.css";
 import { SiteTheme } from "../App";
 import { toast } from "react-toastify";
@@ -38,9 +38,9 @@ function Profile({ setUser }) {
                     if (isBusiness !== localUser.isBusiness) {
                         patchIsBusiness(localUser._id)
                             .then((res) => {
-                                setLocalUser(res.data);
+                                setLocalUser(res.data); // to set the updated info in the inputs
                                 setUser(res.data); // to make navbar re-render if user's business status changes
-                                toast.success("Your profile has been updated successfully");
+                                toast.success("Your profile has been updated successfully!");
                             })
                             .catch((err) => { console.error(err); });
                     } else {

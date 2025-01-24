@@ -21,8 +21,8 @@ const AddCard = forwardRef(({ onHide, requestRender }, ref) => {
             title: yup.string().required().min(2).max(256),
             subtitle: yup.string().min(2).max(256).required(),
             description: yup.string().min(2).max(1024).required(),
-            phone: yup.string().required().matches(/^05[0-9]{1}-?[0-9]{7}$/).min(9).max(11),
-            email: yup.string().email().required().min(5),
+            phone: yup.string().required().matches(/^05[0-9]{1}-?[0-9]{7}$/, "Must be a valid phone number").min(9).max(11),
+            email: yup.string().email().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "must be a valid email").required(),
             web: yup.string().url().min(14),
             image: yup.object({
                 url: yup.string().url().min(14),
@@ -44,7 +44,12 @@ const AddCard = forwardRef(({ onHide, requestRender }, ref) => {
                     onHide();
                     toast.success(`${values.title} has been added successfully`);
                 })
-                .catch(err => console.error(err));
+                .catch(err => {
+                    console.error(err);
+                    if (err.response.status == 403) {
+                        toast.error("To add a card please sign out and login again");
+                    }
+                });
         },
     });
 
