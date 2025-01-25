@@ -101,7 +101,7 @@
         display: none;
     }
 
-    .navbar-logo:hover+.navbar-links-dropdown {
+    .navbar-logo-container:hover>.navbar-links-dropdown {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;

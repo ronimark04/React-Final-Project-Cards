@@ -41,9 +41,6 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
 
     const themes = useContext(SiteTheme);
 
-    console.log(user);
-
-
     return (<>
         <nav
             className="navbar"
@@ -54,19 +51,21 @@ function Navbar({ setSearchQuery, user, setUser, darkmode, setDarkmode }) {
         >
             <div className="navbar-container">
                 <div className="navbar-left-container">
-                    <img
-                        src={navbarLogo}
-                        alt="Logo"
-                        className="navbar-logo"
-                        onClick={() => navigate("/home")}
-                    />
-                    <div className="navbar-links-dropdown">
-                        <NavLink to="/about">About</NavLink>
-                        {user && <NavLink to="/profile">Profile</NavLink>}
-                        {user && <NavLink to="/fav-cards">Fav Cards</NavLink>}
-                        {user && user.isBusiness && (
-                            <NavLink to="/my-cards">My Cards</NavLink>
-                        )}
+                    <div className="navbar-logo-container">
+                        <img
+                            src={navbarLogo}
+                            alt="Logo"
+                            className="navbar-logo"
+                            onClick={() => navigate("/home")}
+                        />
+                        <div className="navbar-links-dropdown">
+                            <NavLink to="/about">About</NavLink>
+                            {user && <NavLink to="/profile">Profile</NavLink>}
+                            {user && <NavLink to="/fav-cards">Fav Cards</NavLink>}
+                            {user && user.isBusiness && (
+                                <NavLink to="/my-cards">My Cards</NavLink>
+                            )}
+                        </div>
                     </div>
                     <div className="navbar-links">
                         <NavLink to="/home">Home</NavLink>

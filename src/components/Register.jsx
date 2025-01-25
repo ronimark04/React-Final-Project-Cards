@@ -37,7 +37,7 @@ function Register({ setUser }) {
                 }).catch(err => {
                     if (err.response && err.response.data === "User already registered") {
                         toast.error("User already registered, please log in");
-                    } else { console.log(err); }
+                    } else { console.error(err); }
                 });
         }
     });

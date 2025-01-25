@@ -75,7 +75,6 @@ function CardPage() {
     };
 
     const themes = useContext(SiteTheme);
-    console.log(themes);
 
     return (
         <>

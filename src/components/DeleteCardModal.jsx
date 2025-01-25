@@ -13,7 +13,6 @@ function DeleteCardModal({ show, onHide, requestRender, cardId, bizNumber }) {
             getCardById(cardId)
                 .then((res) => {
                     setCard(res.data);
-                    console.log(card);
                 })
                 .catch(err => console.error(err));
         }

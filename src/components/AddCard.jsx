@@ -47,7 +47,7 @@ const AddCard = forwardRef(({ onHide, requestRender }, ref) => {
                 .catch(err => {
                     console.error(err);
                     if (err.response.status == 403) {
-                        toast.error("To add a card please sign out and login again");
+                        toast.error("To add a new card please sign out and login again");
                     }
                 });
         },
