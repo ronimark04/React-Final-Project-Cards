@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { getAllCards, toggleLike } from "../services/cardsService";
-import { jwtDecode } from "jwt-decode";
 import DeleteCardModal from "./deleteCardModal";
 import UpdateCardModal from "./updateCardModal";
 import AddCardModal from "./AddCardModal";

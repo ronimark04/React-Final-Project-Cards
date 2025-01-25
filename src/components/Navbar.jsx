@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import LogoutModal from "./LogoutModal";
 import { getUserById } from "../services/userService";
 import navbarLogo from "../assets/navbarLogo.png";

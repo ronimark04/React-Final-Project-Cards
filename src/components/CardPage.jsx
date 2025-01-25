@@ -163,8 +163,6 @@ function CardPage() {
                         </div>
                     </div>
                 </div>
-
-
             ) : (
                 <div className="container my-5">
                     <div className="alert alert-danger" role="alert">

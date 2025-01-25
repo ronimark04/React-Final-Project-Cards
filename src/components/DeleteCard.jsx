@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteCard, getCardById } from "../services/cardsService";
+import { getCardById } from "../services/cardsService";
 
 function DeleteCard({ cardId }) {
     const [card, setCard] = useState({});

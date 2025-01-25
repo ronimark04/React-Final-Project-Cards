@@ -1,7 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import AddCard from "./AddCard";
-import { SiteTheme } from "../App";
 
 function AddCardModal({ show, onHide, requestRender }) {
     const addCardRef = useRef();
@@ -11,7 +10,6 @@ function AddCardModal({ show, onHide, requestRender }) {
             addCardRef.current.submitForm();
         }
     };
-
 
     return (
         <Modal
